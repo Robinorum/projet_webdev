@@ -30,15 +30,17 @@ export class TachesComponent implements OnInit {
 
   }  
 
-  ajouterundef() {
+ajouterundef() {
+    this.newTache.status="undefined"
     this.tacheService.ajoutTaches(this.newTache).subscribe({
       next: (data) => {
-        this.taches.push({titre:this.newTache.titre,termine:false,status:"undefined"});
+        this.taches.push(data);
       }
     });
 
   }  
   ajouterpending() {
+    this.newTache.status="pending"
     this.tacheService.ajoutTaches(this.newTache).subscribe({
       next: (data) => {
         this.taches.push({titre:this.newTache.titre,termine:false,status:"pending"});
@@ -47,17 +49,19 @@ export class TachesComponent implements OnInit {
 
   }  
   ajouterIP() {
+    this.newTache.status="in progress"
     this.tacheService.ajoutTaches(this.newTache).subscribe({
       next: (data) => {
-        this.taches.push({titre:this.newTache.titre,termine:false,status:"IP"});
+        this.taches.push(data);
       }
     });
 
   }  
   ajouterPC() {
+    this.newTache.status="completed"
     this.tacheService.ajoutTaches(this.newTache).subscribe({
       next: (data) => {
-        this.taches.push({titre:this.newTache.titre,termine:false,status:"PC"});
+        this.taches.push(data);
       }
     });
 
