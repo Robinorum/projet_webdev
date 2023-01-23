@@ -33,7 +33,7 @@ export class FiltreTachePipe implements PipeTransform {
 export class FiltreTacheundefinedPipe implements PipeTransform {
 
   transform(value: Array<Tache>): Array<Tache> {
-    return value.filter(tache => tache.status==="undefined" && tache.termine==false)
+    return value.filter(tache => tache.status==="undefined")
     }
   }
 
@@ -43,7 +43,7 @@ export class FiltreTacheundefinedPipe implements PipeTransform {
   export class FiltreTachependingPipe implements PipeTransform {
   
     transform(value: Array<Tache>): Array<Tache> {
-      return value.filter(tache => tache.status==="pending" && tache.termine==false)
+      return value.filter(tache => tache.status==="pending")
       }
     }
   
@@ -53,7 +53,7 @@ export class FiltreTacheundefinedPipe implements PipeTransform {
     export class FiltreTacheIPPipe implements PipeTransform {
     
       transform(value: Array<Tache>): Array<Tache> {
-        return value.filter(tache => tache.status==="in progress" && tache.termine==false)
+        return value.filter(tache => tache.status==="in progress")
         }
       }
     
@@ -63,7 +63,7 @@ export class FiltreTacheundefinedPipe implements PipeTransform {
       export class FiltreTacheCPPipe implements PipeTransform {
       
         transform(value: Array<Tache>): Array<Tache> {
-          return value.filter(tache => tache.status==="completed" && tache.termine==true)
+          return value.filter(tache => tache.status==="completed" )
           }
         }
       

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Tache } from 'src/app/model/tache';
 import { TachesService } from 'src/app/service/taches.service';
 import { UserService } from 'src/app/service/user.service';
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-taches',
@@ -17,6 +18,7 @@ export class TachesComponent implements OnInit {
     status :''
   };  
   
+  
   filter:string = 'Tous';
 
   constructor(private tacheService: TachesService,
@@ -30,7 +32,7 @@ export class TachesComponent implements OnInit {
 
   }  
 
-ajouterundef() {
+  ajouterundef() {
     this.newTache.status="undefined"
     this.tacheService.ajoutTaches(this.newTache).subscribe({
       next: (data) => {
@@ -96,5 +98,13 @@ ajouterundef() {
     this.filter = filter;
   }
 
-
-}
+  drop(event: CdkDragDrop<Tache[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(event.previousContainer.data,
+                        event.container.data,
+                        event.previousIndex,
+                        event.currentIndex);
+      }
+}}
