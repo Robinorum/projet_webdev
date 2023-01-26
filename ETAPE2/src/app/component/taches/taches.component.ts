@@ -80,12 +80,10 @@ export class TachesComponent implements OnInit {
 
   }
 
-  modifier(tache: Tache) {
-    tache.termine = !tache.termine;
+  modifier(tache:Tache){
     this.tacheService.updateTaches(tache).subscribe({
-      next: (data) => {
-      }
-    });
+      next:(data)=>{tache.termine=!tache.termine}
+    })
   }
 
   loggout() {
@@ -99,12 +97,15 @@ export class TachesComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<Tache[]>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      transferArrayItem(event.previousContainer.data,
-                        event.container.data,
-                        event.previousIndex,
-                        event.currentIndex);
-      }
-}}
+    // if(event.container.id=="listeTachesundef"){
+    //   event.previousContainer.data[event.previousIndex]['status']="undefined"}
+    // if(event.container.id=="listeTachespending"){ 
+    //   event.previousContainer.data[event.previousIndex]['status']="pending"}
+    //   if(event.container.id=="listeTachesIP"){ 
+    //     event.previousContainer.data[event.previousIndex]['status']="in progress"}
+    //     if(event.container.id=="listeTachesCP"){ 
+    //       event.previousContainer.data[event.previousIndex]['status']="completed"}
+    console.log( event.previousContainer.data[event.previousIndex])
+  }
+
+}
