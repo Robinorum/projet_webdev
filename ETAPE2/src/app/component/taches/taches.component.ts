@@ -1,30 +1,36 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,Renderer2,ViewChild,ElementRef ,OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Tache } from 'src/app/model/tache';
 import { TachesService } from 'src/app/service/taches.service';
 import { UserService } from 'src/app/service/user.service';
-import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import {CdkDragDrop} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-taches',
   templateUrl: './taches.component.html',
   styleUrls: ['./taches.component.css']
 })
+
 export class TachesComponent implements OnInit {
   taches: Array<Tache> = [];
   newTache: Tache = {
     titre : '',
     termine : false,
     status :''
-  };  
+  };
   
+  @ViewChild('container')
+  container!: ElementRef;
   
   filter:string = 'Tous';
 
   constructor(private tacheService: TachesService,
     private userService: UserService,
-    private router: Router){ }
+    private router: Router,
+    private renderer:Renderer2){ }
   
+
+
   ngOnInit(): void {
     this.tacheService.getTaches().subscribe({
       next: (data:Array<Tache>) => { this.taches = data; }
@@ -39,7 +45,9 @@ export class TachesComponent implements OnInit {
         this.taches.push(data);
       }
     });
-
+    window.setTimeout( function() {
+      window.location.reload();
+    },0);
   }  
   ajouterpending() {
     this.newTache.status="pending"
@@ -48,7 +56,9 @@ export class TachesComponent implements OnInit {
         this.taches.push({titre:this.newTache.titre,termine:false,status:"pending"});
       }
     });
-
+    window.setTimeout( function() {
+      window.location.reload();
+    },0);
   }  
   ajouterIP() {
     this.newTache.status="in progress"
@@ -57,7 +67,9 @@ export class TachesComponent implements OnInit {
         this.taches.push(data);
       }
     });
-
+    window.setTimeout( function() {
+      window.location.reload();
+    },0);
   }  
   ajouterPC() {
     this.newTache.status="completed"
@@ -66,11 +78,11 @@ export class TachesComponent implements OnInit {
         this.taches.push(data);
       }
     });
-
+    window.setTimeout( function() {
+      window.location.reload();
+    },0);
   }  
-  // this.todos.push({text:todoList.todoText, done:false});
- 
-
+  
   supprimer(tache: Tache): void {
     this.tacheService.removeTaches(tache).subscribe({
       next: (data) => {
@@ -80,10 +92,12 @@ export class TachesComponent implements OnInit {
 
   }
 
-  modifier(tache:Tache){
+  modifier(tache: Tache) {
+    tache.termine = !tache.termine;
     this.tacheService.updateTaches(tache).subscribe({
-      next:(data)=>{tache.termine=!tache.termine}
-    })
+      next: (data) => {
+      }
+    });
   }
 
   loggout() {
@@ -96,7 +110,7 @@ export class TachesComponent implements OnInit {
     this.filter = filter;
   }
 
-   drop(event: CdkDragDrop<Tache[]>) {
+  drop(event: CdkDragDrop<Tache[]>) {
     window.setTimeout( function() {
       window.location.reload();
     },0);
@@ -106,5 +120,4 @@ export class TachesComponent implements OnInit {
     console.log(tache)
     this.tacheService.updateTaches(tache).subscribe((response) => {});
 }
-
 }
