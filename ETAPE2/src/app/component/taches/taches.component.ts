@@ -110,6 +110,7 @@ export class TachesComponent implements OnInit {
     this.filter = filter;
   }
 
+
   drop(event: CdkDragDrop<Tache[]>) {
     window.setTimeout( function() {
       window.location.reload();
