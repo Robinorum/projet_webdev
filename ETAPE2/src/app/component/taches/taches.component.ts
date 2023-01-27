@@ -30,7 +30,6 @@ export class TachesComponent implements OnInit {
     private renderer:Renderer2){ }
   
 
-
   ngOnInit(): void {
     this.tacheService.getTaches().subscribe({
       next: (data:Array<Tache>) => { this.taches = data; }
