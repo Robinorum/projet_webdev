@@ -96,16 +96,15 @@ export class TachesComponent implements OnInit {
     this.filter = filter;
   }
 
-  drop(event: CdkDragDrop<Tache[]>) {
-    // if(event.container.id=="listeTachesundef"){
-    //   event.previousContainer.data[event.previousIndex]['status']="undefined"}
-    // if(event.container.id=="listeTachespending"){ 
-    //   event.previousContainer.data[event.previousIndex]['status']="pending"}
-    //   if(event.container.id=="listeTachesIP"){ 
-    //     event.previousContainer.data[event.previousIndex]['status']="in progress"}
-    //     if(event.container.id=="listeTachesCP"){ 
-    //       event.previousContainer.data[event.previousIndex]['status']="completed"}
-    console.log( event.previousContainer.data[event.previousIndex])
-  }
+   drop(event: CdkDragDrop<Tache[]>) {
+    window.setTimeout( function() {
+      window.location.reload();
+    },0);
+    const tache = event.item.data;    
+    console.log(tache)    
+    tache.status = event.container.id;    
+    console.log(tache)
+    this.tacheService.updateTaches(tache).subscribe((response) => {});
+}
 
 }
