@@ -34,7 +34,7 @@
                 <div class="d-flex justify-content-between gap-3 m-1" *ngFor="let tache of (taches | filtreTachepending)">
                     <input (click)="modifier(tache)" type="checkbox" [(ngModel)]="tache.termine">
                     <div class="align-self-center" [ngClass]="tache.termine? 'text-decoration-line-through' : '' ">{{tache.titre}}</div>
-                    <button class="btn btn-outline-danger gap-3 m-1" (click)='supprimer(tache)'>Supprimer</button>
+                    <button class="btn btn-outline-danger gap-3 m-1" (click)='supprimer(tache)'>Supprimer</button> <!-- HERE -->
                 </div>
             </div>
         </div>
